@@ -1,0 +1,332 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About Me - Odin Ledezma</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/howler/2.2.1/howler.min.js"></script> <!-- Agregamos la librería Howler -->
+    <style>
+        /* Estilo general */
+        body {
+            margin: 0;
+            font-family: 'Courier New', monospace;
+            background-color: #000000;
+            color: #00ff00;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            padding: 20px;
+        }
+
+        header {
+            padding: 20px;
+            width: 100%;
+            background-color: #111;
+            border-bottom: 2px solid #00ff00;
+        }
+
+        header h1 {
+            margin: 0;
+            font-size: 2rem;
+            animation: blinkCursor 0.8s step-end infinite;
+        }
+
+        @keyframes blinkCursor {
+            50% {
+                border-right: 2px solid #00ff00;
+            }
+        }
+
+        .about-me-content {
+            max-width: 1200px;
+            margin: 20px;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+            justify-content: center;
+        }
+
+        .about-me-image {
+            width: 250px;
+            height: 250px;
+            object-fit: cover;
+            border-radius: 10px;
+            box-shadow: 0 0 10px #00ff00;
+            transition: transform 0.3s ease, opacity 0.3s ease;
+        }
+
+        .about-me-image:hover {
+            transform: scale(1.1);
+            opacity: 0.8;
+        }
+
+        .about-me-text {
+            width: 100%;
+            max-width: 800px;
+            background-color: #111;
+            padding: 20px;
+            border: 1px solid #00ff00;
+            box-shadow: 0 0 10px #00ff00;
+            margin-top: 20px;
+            text-align: justify;
+        }
+
+        .programming-icon {
+            font-size: 3rem;
+            color: #00ff00;
+            margin-top: 30px;
+        }
+
+        .game-container {
+            margin-top: 30px;
+            background-color: #111;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px #00ff00;
+        }
+
+        canvas {
+            background-color: #000;
+            display: block;
+            margin: 0 auto;
+        }
+
+        .controls-text {
+            color: #00ff00;
+            font-size: 1.2rem;
+            margin-top: 10px;
+        }
+
+        .high-score-text {
+            color: #00ff00;
+            font-size: 1.5rem;
+            margin-top: 10px;
+        }
+
+        .restart-button {
+            background-color: #00ff00;
+            color: #000;
+            padding: 10px 20px;
+            font-size: 1.2rem;
+            font-weight: bold;
+            text-transform: uppercase;
+            border: 1px solid #00ff00;
+            transition: background-color 0.3s ease, transform 0.3s ease;
+            margin-top: 20px;
+            cursor: pointer;
+        }
+
+        .restart-button:hover {
+            background-color: #000;
+            color: #00ff00;
+            transform: scale(1.1);
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>About Me</h1>
+    </header>
+
+    <div class="about-me-content">
+        <img src="img/infancia.jpg" alt="Childhood" class="about-me-image" />
+        <img src="img/gato.jpg" alt="Cat" class="about-me-image" id="cat-image" />
+        <img src="img/videojuegos.jpg" alt="Video Games" class="about-me-image" />
+        <img src="img/bicicleta.jpg" alt="Bicycle" class="about-me-image" />
+    </div>
+
+    <div class="about-me-text">
+        <p>
+            Hello, my name is Odin Fernando Ledezma Duran, and I’m a responsible individual passionate about technology and video games. 
+            Since I was a child, I’ve been fascinated by computers, which sparked my interest in learning programming. 
+            Over the years, this passion has driven me to constantly improve my skills and stay up-to-date with the latest technological trends. 
+        </p>
+        <p>
+            In my free time, I enjoy playing sports, reading books, and spending time with cats. They bring me joy and help me relax. 
+            I am currently looking for an internship opportunity as part of my professional practice, which will allow me to fulfill the required hours at my university.
+        </p>
+        <div class="programming-icon">
+            <i class="fas fa-code"></i> <!-- Icono relacionado con la programación -->
+        </div>
+    </div>
+
+    <!-- Videojuego Snake -->
+    <div class="game-container">
+        <h2>Play Snake!</h2>
+        <canvas id="snake" width="400" height="400"></canvas>
+        <div class="controls-text">
+            Controls: <br>
+            <strong>W</strong> (Up) <br>
+            <strong>A</strong> (Left) <br>
+            <strong>S</strong> (Down) <br>
+            <strong>D</strong> (Right)
+        </div>
+        <div class="high-score-text">
+            High Score: <span id="high-score">0</span>
+        </div>
+        <button class="restart-button" id="restart-btn">Restart Game</button> <!-- Botón de reinicio -->
+    </div>
+
+    <!-- Sonidos del juego -->
+    <audio id="cat-sound" src="audio/cat-sound.mp3"></audio>
+    <audio id="eat-sound" src="audio/eat-sound.mp3"></audio>
+    <audio id="game-over-sound" src="audio/game-over-sound.mp3"></audio>
+
+    <script>
+        // Sonidos con Howler.js
+        const catSound = new Howl({
+            src: ['audio/cat-sound.mp3'],
+            volume: 1.0,
+        });
+
+        const eatSound = new Howl({
+            src: ['audio/eat-sound.mp3'],
+            volume: 0.5,
+        });
+
+        const gameOverSound = new Howl({
+            src: ['audio/game-over-sound.mp3'],
+            volume: 1.0,
+        });
+
+        const catImage = document.getElementById('cat-image');
+
+        // Reproducir sonido de gato al hacer click en la imagen del gato
+        catImage.addEventListener('click', () => {
+            catSound.play();
+        });
+
+        // Código del juego Snake
+        const canvas = document.getElementById("snake");
+        const ctx = canvas.getContext("2d");
+
+        const gridSize = 20;
+        const canvasSize = 400;
+        let snake = [{ x: 8 * gridSize, y: 8 * gridSize }];
+        let food = { x: 5 * gridSize, y: 5 * gridSize };
+        let dx = gridSize, dy = 0; // Dirección inicial
+        let score = 0;
+        let highScore = localStorage.getItem("highScore") || 0; // Recupera el puntaje más alto
+        const highScoreElement = document.getElementById("high-score");
+
+        let gameSpeed = 200; // Velocidad inicial (en milisegundos)
+
+        // Dibujar la serpiente
+        function drawSnake() {
+            ctx.fillStyle = "#00ff00";
+            snake.forEach((segment) => {
+                ctx.fillRect(segment.x, segment.y, gridSize, gridSize);
+            });
+        }
+
+        // Dibujar la comida
+        function drawFood() {
+            ctx.fillStyle = "#ff0000";
+            ctx.fillRect(food.x, food.y, gridSize, gridSize);
+        }
+
+        // Mover la serpiente
+        function moveSnake() {
+            const head = { x: snake[0].x + dx, y: snake[0].y + dy };
+            snake.unshift(head); // Añadir la nueva cabeza
+
+            if (head.x === food.x && head.y === food.y) {
+                score += 1;
+                eatSound.play(); // Reproducir sonido cuando come la comida
+                food = {
+                    x: Math.floor(Math.random() * (canvasSize / gridSize)) * gridSize,
+                    y: Math.floor(Math.random() * (canvasSize / gridSize)) * gridSize,
+                };
+            } else {
+                snake.pop(); // Eliminar la cola
+            }
+        }
+
+        // Verificar colisiones
+        function checkCollisions() {
+            const head = snake[0];
+            if (head.x < 0 || head.x >= canvasSize || head.y < 0 || head.y >= canvasSize) {
+                return true; // Colisión con el borde
+            }
+
+            for (let i = 1; i < snake.length; i++) {
+                if (head.x === snake[i].x && head.y === snake[i].y) {
+                    return true; // Colisión con sí misma
+                }
+            }
+
+            return false;
+        }
+
+        // Actualizar el juego
+        function updateGame() {
+            moveSnake();
+
+            if (checkCollisions()) {
+                gameOverSound.play();
+                resetGame();
+                return;
+            }
+
+            if (score > highScore) {
+                highScore = score;
+                localStorage.setItem("highScore", highScore); // Guardar el nuevo puntaje más alto
+            }
+
+            // Dibujar todo
+            ctx.clearRect(0, 0, canvasSize, canvasSize);
+            drawSnake();
+            drawFood();
+            highScoreElement.textContent = highScore;
+        }
+
+        // Reiniciar el juego
+        function resetGame() {
+            snake = [{ x: 8 * gridSize, y: 8 * gridSize }];
+            dx = gridSize;
+            dy = 0;
+            score = 0;
+            gameSpeed = 200; // Restaurar la velocidad inicial
+        }
+
+        // Control de teclas
+        document.addEventListener("keydown", (event) => {
+            if (event.key === "w" && dy === 0) {
+                dx = 0;
+                dy = -gridSize;
+            } else if (event.key === "s" && dy === 0) {
+                dx = 0;
+                dy = gridSize;
+            } else if (event.key === "a" && dx === 0) {
+                dx = -gridSize;
+                dy = 0;
+            } else if (event.key === "d" && dx === 0) {
+                dx = gridSize;
+                dy = 0;
+            }
+        });
+
+        // Botón de reinicio
+        document.getElementById("restart-btn").addEventListener("click", () => {
+            resetGame();
+            updateGame();
+        });
+
+        // Iniciar el juego con intervalo
+        setInterval(updateGame, gameSpeed);
+    </script>
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+

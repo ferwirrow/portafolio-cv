@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact - Odin Ledezma</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <style>
+        /* General Style */
+        body {
+            margin: 0;
+            font-family: 'Courier New', monospace;
+            background-color: #000000;
+            color: #00ff00;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 20px;
+            overflow: hidden; /* Prevent scrollbars from showing */
+        }
+
+        header {
+            padding: 20px;
+            width: 100%;
+            background-color: #111;
+            border-bottom: 2px solid #00ff00;
+            text-align: center;
+        }
+
+        header h1 {
+            margin: 0;
+            font-size: 2.5rem;
+            animation: blinkCursor 0.8s step-end infinite, slideIn 2s ease;
+        }
+
+        @keyframes blinkCursor {
+            50% {
+                border-right: 3px solid #00ff00;
+            }
+        }
+
+        @keyframes slideIn {
+            0% {
+                transform: translateX(-100%);
+                opacity: 0;
+            }
+            100% {
+                transform: translateX(0);
+                opacity: 1;
+            }
+        }
+
+        .contact-container {
+            margin-top: 20px;
+            background-color: #111;
+            border: 1px solid #00ff00;
+            padding: 20px;
+            width: 90%;
+            max-width: 800px;
+            box-shadow: 0 0 10px #00ff00;
+        }
+
+        .contact-container h2 {
+            text-align: center;
+            text-transform: uppercase;
+            margin: 10px 0;
+            color: #00ff00;
+        }
+
+        .contact-item {
+            margin: 20px 0;
+            display: flex;
+            align-items: center;
+            text-align: left;
+            font-size: 1.2rem;
+            transition: color 0.3s ease, transform 0.3s ease;
+        }
+
+        .contact-item i {
+            margin-right: 15px;
+            font-size: 2rem;
+            color: #00ff00;
+            transition: transform 0.3s ease, color 0.3s ease;
+        }
+
+        .contact-item:hover {
+            color: #ff00ff;
+            transform: scale(1.05);
+        }
+
+        .contact-item i:hover {
+            color: #ff00ff;
+            transform: rotate(15deg);
+        }
+
+        footer {
+            margin-top: 20px;
+            padding: 10px;
+            width: 100%;
+            background-color: #111;
+            border-top: 2px solid #00ff00;
+            text-align: center;
+        }
+
+        .footer-icons {
+            margin-top: 10px;
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+        }
+
+        .footer-icons i {
+            font-size: 2.5rem;
+            transition: transform 0.3s ease, color 0.3s ease;
+        }
+
+        .footer-icons i:hover {
+            transform: scale(1.2);
+            color: #ff00ff;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Contact - Odin Ledezma</h1>
+    </header>
+
+    <div class="contact-container">
+        <h2>Get in touch</h2>
+        <div class="contact-item">
+            <i class="fas fa-envelope"></i>
+            <p><strong>Email:</strong> odinferledezma@gmail.com</p>
+        </div>
+        <div class="contact-item">
+            <i class="fas fa-phone"></i>
+            <p><strong>Phone:</strong> 627-114-6699</p>
+        </div>
+        <div class="contact-item">
+            <i class="fab fa-github"></i>
+            <p><strong>GitHub:</strong> <a href="https://github.com/ferwirrow" target="_blank" style="color: #00ff00; text-decoration: none;">github.com/ferwirrow</a></p>
+        </div>
+        <div class="contact-item">
+            <i class="fas fa-map-marker-alt"></i>
+            <p><strong>Location:</strong> Chihuahua, Chihuahua, northern area</p>
+        </div>
+    </div>
+
+    <footer>
+        <p>&copy; 2024 Odin Ledezma</p>
+        <div class="footer-icons">
+            <i class="fas fa-code"></i>
+            <i class="fas fa-laptop"></i>
+            <i class="fas fa-database"></i>
+            <i class="fas fa-network-wired"></i>
+        </div>
+    </footer>
+</body>
+</html>
+
+

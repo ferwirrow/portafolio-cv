@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Skills - Odin Ledezma</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <style>
+        /* General Terminal Style */
+        body {
+            margin: 0;
+            font-family: 'Courier New', monospace;
+            background-color: #000000;
+            color: #00ff00;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            min-height: 100vh;
+            padding: 20px;
+            overflow: hidden; /* Prevent scrollbars from showing */
+        }
+
+        /* Moving Background Effect */
+        body::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            background: linear-gradient(to bottom, rgba(0, 0, 0, 0.5), #000000),
+                        url('https://www.transparenttextures.com/patterns/hexellence.png');
+            background-size: 200px 200px;
+            animation: scrollBg 20s linear infinite;
+        }
+
+        @keyframes scrollBg {
+            from {
+                background-position: 0 0;
+            }
+            to {
+                background-position: 0 100%;
+            }
+        }
+
+        header {
+            padding: 20px;
+            width: 100%;
+            background-color: #111;
+            border-bottom: 2px solid #00ff00;
+            text-align: center;
+            box-shadow: 0 0 20px #00ff00;
+        }
+
+        header h1 {
+            margin: 0;
+            font-size: 2.5rem;
+            animation: blinkCursor 0.8s step-end infinite;
+        }
+
+        @keyframes blinkCursor {
+            50% {
+                border-right: 2px solid #00ff00;
+            }
+        }
+
+        .skills-container {
+            margin-top: 20px;
+            background-color: #111;
+            border: 1px solid #00ff00;
+            padding: 20px;
+            width: 90%;
+            max-width: 800px;
+            box-shadow: 0 0 10px #00ff00;
+            position: relative;
+            overflow: hidden; /* Clip decorations */
+        }
+
+        .skills-container::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 50px;
+            height: 50px;
+            background: radial-gradient(circle, #00ff00, transparent);
+            animation: pulse 1.5s infinite alternate;
+        }
+
+        @keyframes pulse {
+            from {
+                transform: scale(1);
+                opacity: 1;
+            }
+            to {
+                transform: scale(1.5);
+                opacity: 0;
+            }
+        }
+
+        .skills-container h2 {
+            margin-top: 0;
+            text-transform: uppercase;
+            text-align: center;
+            color: #00ff00;
+            text-shadow: 0 0 5px #00ff00;
+            animation: slideIn 2s ease;
+        }
+
+        @keyframes slideIn {
+            0% {
+                transform: translateY(-50px);
+                opacity: 0;
+            }
+            100% {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+
+        .skills-list {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .skills-list li {
+            margin: 15px 0;
+            font-size: 1.2rem;
+            display: flex;
+            align-items: center;
+            animation: fadeIn 1.5s ease;
+        }
+
+        @keyframes fadeIn {
+            0% {
+                opacity: 0;
+            }
+            100% {
+                opacity: 1;
+            }
+        }
+
+        .skills-list li i {
+            margin-right: 10px;
+            color: #00ff00;
+            animation: rotateIcon 3s linear infinite;
+        }
+
+        @keyframes rotateIcon {
+            0% {
+                transform: rotate(0);
+            }
+            100% {
+                transform: rotate(360deg);
+            }
+        }
+
+        footer {
+            margin-top: 20px;
+            padding: 10px;
+            width: 100%;
+            background-color: #111;
+            border-top: 2px solid #00ff00;
+            text-align: center;
+            box-shadow: 0 0 10px #00ff00;
+        }
+
+        footer a {
+            color: #00ff00;
+            text-decoration: none;
+        }
+
+        footer a:hover {
+            text-decoration: underline;
+            color: #ff00ff;
+        }
+
+        /* Decorative Binary Rain */
+        .binary-rain {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            font-size: 1rem;
+            color: #00ff00;
+            line-height: 1.5rem;
+            overflow: hidden;
+            z-index: -2;
+            animation: scrollRain 10s linear infinite;
+        }
+
+        @keyframes scrollRain {
+            from {
+                transform: translateY(-100%);
+            }
+            to {
+                transform: translateY(0);
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Skills - Odin Ledezma</h1>
+    </header>
+
+    <div class="skills-container">
+        <h2>Technical Skills</h2>
+        <ul class="skills-list">
+            <li><i class="fas fa-code"></i><strong>Programming Languages:</strong> C++, Python, C#, Lua, JavaScript, HTML</li>
+            <li><i class="fas fa-file-alt"></i><strong>Office Tools:</strong> Excel, Word, Git, SQL</li>
+            <li><i class="fas fa-desktop"></i><strong>Operating Systems:</strong> Windows, macOS, Linux</li>
+            <li><i class="fas fa-tools"></i><strong>Technical Support:</strong> Hardware and software maintenance</li>
+            <li><i class="fas fa-network-wired"></i><strong>Networking:</strong> Network configuration and troubleshooting</li>
+            <li><i class="fas fa-database"></i><strong>Databases:</strong> Management and administration of databases</li>
+            <li><i class="fas fa-project-diagram"></i><strong>Methodologies:</strong> Scrum, Agile</li>
+        </ul>
+    </div>
+
+    <footer>
+        <p>&copy; 2024 Odin Ledezma. <a href="index.html">Back to Home</a></p>
+    </footer>
+    <div class="binary-rain">
+        0110100001101001011100110110000101101110<br>
+        011011000110100101110011011100000110100101<br>
+        0110010101101110011010110110010101110010<br>
+    </div>
+</body>
+</html>
+
+
+
+
+
