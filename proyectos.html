@@ -13,24 +13,40 @@
             padding: 20px;
             max-width: 800px;
             margin: 0 auto;
-        }
-        h1 {
-            text-align: center;
-            border-bottom: 2px solid #00ff00;
-            padding-bottom: 10px;
+            position: relative;
+            overflow-x: hidden;
         }
         .project {
             border: 1px solid #00ff00;
             margin-bottom: 20px;
             padding: 15px;
+            box-shadow: 0 0 10px #00ff00;
+            transition: transform 0.3s ease;
         }
-        .project img {
-            max-width: 100%;
+        .project:hover {
+            transform: scale(1.02);
+        }
+        .project-images {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-top: 10px;
+        }
+        .project-images img {
+            max-width: 500px;
             height: auto;
             border: 2px solid #00ff00;
+            box-shadow: 0 0 5px #00ff00;
+            transition: transform 0.3s ease;
         }
-        .project h2 {
-            margin-top: 0;
+        .project-images img:hover {
+            transform: scale(1.1);
+        }
+        h1 {
+            text-align: center;
+            border-bottom: 2px solid #00ff00;
+            padding-bottom: 10px;
+            text-shadow: 0 0 10px #00ff00;
         }
         .project a {
             color: #00ff00;
@@ -39,18 +55,12 @@
             padding: 5px 10px;
             display: inline-block;
             margin-top: 10px;
+            transition: all 0.3s ease;
         }
         .project a:hover {
             background-color: #00ff00;
             color: #000;
-        }
-        #cursor {
-            animation: blink 0.7s infinite;
-        }
-        @keyframes blink {
-            0% { opacity: 0; }
-            50% { opacity: 1; }
-            100% { opacity: 0; }
+            box-shadow: 0 0 15px #00ff00;
         }
     </style>
 </head>
@@ -61,22 +71,16 @@
     <script>
         const projects = [
             {
-                title: "Proyecto 1",
-                description: "Este es mi primer proyecto. Utilicé tecnologías como HTML, CSS y JavaScript para crear una aplicación web interactiva.",
-                image: "https://via.placeholder.com/300x200.png?text=Proyecto+1",
-                github: "https://github.com/tuusuario/proyecto1"
+                title: "2D Game Engine In Progres",
+                description: "This project is a simple 2D game engine built using C++, SDL2, and Lua. It’s designed to be a learning tool for understanding the fundamentals of C++ programming concepts (like pointers and memory management), game development principles (rendering, input handling, and basic physics), and how libraries like SDL2 work under the hood. The goal is to gain deeper insight into how things operate at a lower level, making this an exciting way to learn and experiment with game mechanics.",
+                images: ["img/2imagen.png", "img/2dcode.png"],
+                github: "https://github.com/ferwirrow/Game-engine.git"
             },
             {
-                title: "Proyecto 2",
-                description: "Mi segundo proyecto fue un desafío mayor. Implementé una base de datos y utilicé Node.js para el backend.",
-                image: "https://via.placeholder.com/300x200.png?text=Proyecto+2",
-                github: "https://github.com/tuusuario/proyecto2"
-            },
-            {
-                title: "Proyecto 3",
-                description: "En este proyecto, me enfoqué en el aprendizaje automático y la inteligencia artificial para crear un modelo predictivo.",
-                image: "https://via.placeholder.com/300x200.png?text=Proyecto+3",
-                github: "https://github.com/tuusuario/proyecto3"
+                title: "Book Report Viewer with Raylib",
+                description: "This project was developed to learn about Raylib and to create a graphical user interface (GUI) using the library. Written in Python, the application reads a text file (such as a book), analyzes its content, and generates a report that counts the total number of words and the frequency of each letter in the text. The user can scroll through the results in an interactive window with a clean and dynamic interface. The goal of this project was to understand how to work with Raylib for building graphical applications and to implement text analysis functions in Python for real-world use cases.",
+                images: ["img/tabla.png", "img/codigotabla.png"],
+                github: "https://github.com/ferwirrow/bookbot.git"
             }
         ];
 
@@ -85,38 +89,41 @@
             projects.forEach(project => {
                 const projectElement = document.createElement('div');
                 projectElement.className = 'project';
+                
+                // Contenido principal del proyecto
                 projectElement.innerHTML = `
                     <h2>${project.title}</h2>
-                    <img src="${project.image}" alt="${project.title}">
                     <p>${project.description}</p>
-                    <a href="${project.github}" target="_blank">Ver en GitHub</a>
                 `;
+
+                // Contenedor para imágenes
+                const imagesContainer = document.createElement('div');
+                imagesContainer.className = 'project-images';
+
+                project.images.forEach(image => {
+                    const imgElement = document.createElement('img');
+                    imgElement.src = image;
+                    imgElement.alt = `${project.title} image`;
+                    imagesContainer.appendChild(imgElement);
+                });
+
+                projectElement.appendChild(imagesContainer);
+
+                // Enlace a GitHub
+                const githubLink = document.createElement('a');
+                githubLink.href = project.github;
+                githubLink.target = '_blank';
+                githubLink.innerText = "View on GitHub";
+                projectElement.appendChild(githubLink);
+
+                // Añadir proyecto al contenedor principal
                 projectsContainer.appendChild(projectElement);
             });
         }
 
-        function typeWriter(text, i, fnCallback) {
-            if (i < text.length) {
-                document.querySelector("h1").innerHTML = text.substring(0, i+1) + '<span id="cursor">_</span>';
-                setTimeout(function() {
-                    typeWriter(text, i + 1, fnCallback)
-                }, 100);
-            } else if (typeof fnCallback == 'function') {
-                setTimeout(fnCallback, 700);
-            }
-        }
-
-        document.addEventListener('DOMContentLoaded', function() {
-            typeWriter("Mis Proyectos", 0, function() {
-                displayProjects();
-            });
-        });
+        document.addEventListener('DOMContentLoaded', displayProjects);
     </script>
 </body>
 </html>
 
 
-
-
-
-  
