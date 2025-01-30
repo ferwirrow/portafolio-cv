@@ -1,9 +1,9 @@
-<!DOCTYPE html>
+<<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Experience Timeline</title>
+    <title>Professional Experience</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
     <style>
         /* Base styles */
@@ -41,125 +41,81 @@
             }
         }
 
-        /* Timeline container */
-        .timeline {
-            position: relative;
+        /* Content container */
+        .experience-container {
             margin: 50px auto;
-            width: 90%;
             max-width: 800px;
+            padding: 20px;
+            background-color: #111;
+            border-radius: 10px;
+            box-shadow: 0 0 20px rgba(0, 255, 0, 0.5);
         }
 
-        .timeline::before {
-            content: '';
-            position: absolute;
-            left: 50%;
-            top: 0;
-            bottom: 0;
-            width: 4px;
-            background-color: #00ff00;
-            transform: translateX(-50%);
-        }
-
-        /* Timeline items */
-        .timeline-item {
-            position: relative;
-            margin-bottom: 50px;
-            width: calc(50% - 30px);
+        .experience-item {
+            margin-bottom: 30px;
             padding: 20px;
             border: 2px solid #00ff00;
             box-shadow: 0 0 10px #00ff00;
-            background-color: #111;
-            animation: fadeIn 1.5s ease-out;
-        }
-
-        .timeline-item:nth-child(even) {
-            left: 50%;
-            transform: translateX(30px);
-        }
-
-        .timeline-item:nth-child(odd) {
-            left: 0;
-            transform: translateX(-30px);
-        }
-
-        .timeline-item:hover {
             background-color: #222;
-            transform: scale(1.05);
+            border-radius: 10px;
             transition: transform 0.3s ease, background-color 0.3s ease;
         }
 
-        .timeline-item h3 {
+        .experience-item:hover {
+            background-color: #333;
+            transform: scale(1.05);
+        }
+
+        .experience-item h3 {
             margin: 10px 0;
             color: #00ff00;
             text-align: center;
         }
 
-        .timeline-item p {
-            margin: 10px 0 0;
-            font-size: 0.9rem;
-        }
-
-        .timeline-item span {
+        .experience-item span {
             display: block;
-            font-size: 0.8rem;
+            font-size: 0.9rem;
             color: #00ff88;
             margin-bottom: 10px;
             text-align: center;
         }
 
-        /* Icons repositioned at the top */
+        .experience-item p {
+            font-size: 1rem;
+            color: #e1e1e1;
+            text-align: justify;
+        }
+
+        /* Icons for job titles */
         .icon {
             display: block;
             margin: 0 auto 10px;
             font-size: 2rem;
             color: #00ff00;
         }
-
-        @keyframes fadeIn {
-            from {
-                opacity: 0;
-                transform: translateY(20px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
     </style>
 </head>
 <body>
     <h1>Professional Experience</h1>
 
-    <div class="timeline">
-        <div class="timeline-item">
+    <div class="experience-container">
+        <div class="experience-item">
             <i class="fas fa-store icon"></i>
             <h3>Cashier, Walmart</h3>
             <span>June 2021 - September 2022</span>
             <p>
-                I maintained accurate cash drawer balances through meticulous cash handling and conducted regular reconciliation at the end of each shift.
-                I efficiently handled customer transactions, including cash, credit, and debit payments.
+                During my time as a cashier, I managed cash drawer balances and ensured accuracy with each transaction. I effectively handled cash, credit, and debit payments, ensuring a smooth customer experience during every shift.
             </p>
         </div>
 
-        <div class="timeline-item">
-            <i class="fas fa-laptop-code icon"></i>
-            <h3>Freelance Programmer</h3>
-            <span>2022 - 2023</span>
-            <p>
-                I successfully undertook various projects, leveraging my expertise in programming and software development. I collaborated with clients to understand their specific requirements, providing tailored solutions to meet their unique needs.
-            </p>
-        </div>
-
-        <div class="timeline-item">
+        <div class="experience-item">
             <i class="fas fa-industry icon"></i>
             <h3>Operator, Aptiv</h3>
             <span>March 2024 - September 2024</span>
             <p>
-                Worked as a production operator ensuring efficient assembly processes and maintaining quality standards.
+                As a production operator, I contributed to maintaining efficient assembly processes, adhering to high-quality standards and ensuring production goals were consistently met.
             </p>
         </div>
     </div>
 </body>
 </html>
-
-

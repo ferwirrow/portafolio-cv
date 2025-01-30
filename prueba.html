@@ -1,234 +1,123 @@
 <!DOCTYPE html>
-<html lang="es">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Mis Proyectos - Portafolio Retro</title>
+    <title>Professional Experience</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
     <style>
+        /* Base styles */
         body {
-            background-color: #000;
-            color: #00ff00;
+            margin: 0;
             font-family: 'Courier New', monospace;
-            line-height: 1.6;
-            padding: 20px;
-            max-width: 800px;
-            margin: 0 auto;
-            position: relative;
+            color: #00ff00;
             overflow-x: hidden;
+            background: linear-gradient(-45deg, #000, #003300, #001a00, #003300);
+            background-size: 400% 400%;
+            animation: gradientAnimation 10s ease infinite;
         }
-        .assembly-commands {
-            position: fixed;
-            top: 0;
-            bottom: 0;
-            width: 150px;
-            overflow: hidden;
-            font-size: 12px;
-            line-height: 1.2;
-            padding: 10px;
-            box-sizing: border-box;
-            z-index: 1000;
-            pointer-events: none;
+
+        @keyframes gradientAnimation {
+            0% {
+                background-position: 0% 50%;
+            }
+            50% {
+                background-position: 100% 50%;
+            }
+            100% {
+                background-position: 0% 50%;
+            }
         }
-        .assembly-commands::before {
-            content: "";
-            position: absolute;
-            top: 0;
-            bottom: 0;
-            width: 100%;
-            background: linear-gradient(to bottom, rgba(0,0,0,1) 0%, rgba(0,0,0,0) 10%, rgba(0,0,0,0) 90%, rgba(0,0,0,1) 100%);
-            z-index: 1;
-        }
-        .assembly-left {
-            left: 0;
-            text-align: left;
-        }
-        .assembly-right {
-            right: 0;
-            text-align: right;
-        }
-        .assembly-content {
-            animation: scrollAssembly 60s linear infinite;
-        }
-        @keyframes scrollAssembly {
-            0% { transform: translateY(100%); }
-            100% { transform: translateY(-100%); }
-        }
-        .retro-stars {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            pointer-events: none;
-            z-index: -1;
-        }
-        .star {
-            position: absolute;
-            width: 2px;
-            height: 2px;
-            background-color: #00ff00;
-            opacity: 0;
-            animation: twinkle 5s infinite;
-        }
-        @keyframes twinkle {
-            0%, 100% { opacity: 0; }
-            50% { opacity: 1; }
-        }
+
         h1 {
             text-align: center;
-            border-bottom: 2px solid #00ff00;
-            padding-bottom: 10px;
-            text-shadow: 0 0 10px #00ff00;
+            margin: 20px 0;
+            animation: blinkCursor 1s step-end infinite;
         }
-        .project {
-            border: 1px solid #00ff00;
-            margin-bottom: 20px;
-            padding: 15px;
-            box-shadow: 0 0 10px #00ff00;
-            transition: transform 0.3s ease;
+
+        @keyframes blinkCursor {
+            50% {
+                border-right: 2px solid #00ff00;
+            }
         }
-        .project:hover {
-            transform: scale(1.02);
+
+        /* Content container */
+        .experience-container {
+            margin: 50px auto;
+            max-width: 800px;
+            padding: 20px;
+            background-color: #111;
+            border-radius: 10px;
+            box-shadow: 0 0 20px rgba(0, 255, 0, 0.5);
         }
-        .project img {
-            max-width: 100%;
-            height: auto;
+
+        .experience-item {
+            margin-bottom: 30px;
+            padding: 20px;
             border: 2px solid #00ff00;
+            box-shadow: 0 0 10px #00ff00;
+            background-color: #222;
+            border-radius: 10px;
+            transition: transform 0.3s ease, background-color 0.3s ease;
         }
-        .project h2 {
-            margin-top: 0;
+
+        .experience-item:hover {
+            background-color: #333;
+            transform: scale(1.05);
         }
-        .project a {
+
+        .experience-item h3 {
+            margin: 10px 0;
             color: #00ff00;
-            text-decoration: none;
-            border: 1px solid #00ff00;
-            padding: 5px 10px;
-            display: inline-block;
-            margin-top: 10px;
-            transition: all 0.3s ease;
+            text-align: center;
         }
-        .project a:hover {
-            background-color: #00ff00;
-            color: #000;
-            box-shadow: 0 0 15px #00ff00;
+
+        .experience-item span {
+            display: block;
+            font-size: 0.9rem;
+            color: #00ff88;
+            margin-bottom: 10px;
+            text-align: center;
         }
-        #cursor {
-            animation: blink 0.7s infinite;
+
+        .experience-item p {
+            font-size: 1rem;
+            color: #e1e1e1;
+            text-align: justify;
         }
-        @keyframes blink {
-            0% { opacity: 0; }
-            50% { opacity: 1; }
-            100% { opacity: 0; }
+
+        /* Icons for job titles */
+        .icon {
+            display: block;
+            margin: 0 auto 10px;
+            font-size: 2rem;
+            color: #00ff00;
         }
     </style>
 </head>
 <body>
-    <div class="assembly-commands assembly-left">
-        <div class="assembly-content">
-            MOV AX, 0x1234<br>
-            PUSH AX<br>
-            POP BX<br>
-            ADD CX, DX<br>
-            JMP 0x100<br>
-            INT 21h<br>
-            XOR AX, AX<br>
-            LEA SI, [BX+DI]<br>
-            CMP AL, 0xFF<br>
-            JNZ loop_start<br>
-            CALL process_data<br>
-            RET<br>
+    <h1>Professional Experience</h1>
+
+    <div class="experience-container">
+        <div class="experience-item">
+            <i class="fas fa-store icon"></i>
+            <h3>Cashier, Walmart</h3>
+            <span>June 2021 - September 2022</span>
+            <p>
+                During my time as a cashier, I managed cash drawer balances and ensured accuracy with each transaction. I effectively handled cash, credit, and debit payments, ensuring a smooth customer experience during every shift.
+            </p>
+        </div>
+
+        <div class="experience-item">
+            <i class="fas fa-industry icon"></i>
+            <h3>Operator, Aptiv</h3>
+            <span>March 2024 - September 2024</span>
+            <p>
+                As a production operator, I contributed to maintaining efficient assembly processes, adhering to high-quality standards and ensuring production goals were consistently met.
+            </p>
         </div>
     </div>
-    <div class="assembly-commands assembly-right">
-        <div class="assembly-content">
-            AND EAX, 0xFFFFFFFF<br>
-            OR EBX, ECX<br>
-            SHL EDX, 4<br>
-            ROL ESI, 1<br>
-            XCHG EAX, EBX<br>
-            PUSH DWORD PTR [ESP+4]<br>
-            CALL FAR PTR func<br>
-            LODSB<br>
-            STOSW<br>
-            REP MOVSB<br>
-            LAHF<br>
-            SAHF<br>
-        </div>
-    </div>
-    <div class="retro-stars"></div>
-    <h1>Mis Proyectos<span id="cursor">_</span></h1>
-    <div id="projects"></div>
-
-    <script>
-        const projects = [
-            {
-                title: "Proyecto 1",
-                description: "Este es mi primer proyecto. Utilicé tecnologías como HTML, CSS y JavaScript para crear una aplicación web interactiva.",
-                image: "https://via.placeholder.com/300x200.png?text=Proyecto+1",
-                github: "https://github.com/tuusuario/proyecto1"
-            },
-            {
-                title: "Proyecto 2",
-                description: "Mi segundo proyecto fue un desafío mayor. Implementé una base de datos y utilicé Node.js para el backend.",
-                image: "https://via.placeholder.com/300x200.png?text=Proyecto+2",
-                github: "https://github.com/tuusuario/proyecto2"
-            },
-            {
-                title: "Proyecto 3",
-                description: "En este proyecto, me enfoqué en el aprendizaje automático y la inteligencia artificial para crear un modelo predictivo.",
-                image: "https://via.placeholder.com/300x200.png?text=Proyecto+3",
-                github: "https://github.com/tuusuario/proyecto3"
-            }
-        ];
-
-        function displayProjects() {
-            const projectsContainer = document.getElementById('projects');
-            projects.forEach(project => {
-                const projectElement = document.createElement('div');
-                projectElement.className = 'project';
-                projectElement.innerHTML = `
-                    <h2>${project.title}</h2>
-                    <img src="${project.image}" alt="${project.title}">
-                    <p>${project.description}</p>
-                    <a href="${project.github}" target="_blank">Ver en GitHub</a>
-                `;
-                projectsContainer.appendChild(projectElement);
-            });
-        }
-
-        function typeWriter(text, i, fnCallback) {
-            if (i < text.length) {
-                document.querySelector("h1").innerHTML = text.substring(0, i+1) + '<span id="cursor">_</span>';
-                setTimeout(function() {
-                    typeWriter(text, i + 1, fnCallback)
-                }, 100);
-            } else if (typeof fnCallback == 'function') {
-                setTimeout(fnCallback, 700);
-            }
-        }
-
-        function createStars() {
-            const starsContainer = document.querySelector('.retro-stars');
-            for (let i = 0; i < 50; i++) {
-                const star = document.createElement('div');
-                star.className = 'star';
-                star.style.left = `${Math.random() * 100}%`;
-                star.style.top = `${Math.random() * 100}%`;
-                star.style.animationDelay = `${Math.random() * 5}s`;
-                starsContainer.appendChild(star);
-            }
-        }
-
-        document.addEventListener('DOMContentLoaded', function() {
-            createStars();
-            typeWriter("Mis Proyectos", 0, function() {
-                displayProjects();
-            });
-        });
-    </script>
 </body>
 </html>
-
-
 
 
